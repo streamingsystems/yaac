@@ -594,6 +594,7 @@ class Client
     protected function request($url, $payload = [], $method = 'POST'): ResponseInterface
     {
         try {
+            Log::debug("Sending request to: $url: ",$payload);
             $response = $this->getHttpClient()->request($method, $url, [
                 'json'    => $payload,
                 'headers' => [
