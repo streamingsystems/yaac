@@ -12,6 +12,7 @@ use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\RequestException;
 use League\Flysystem\Filesystem;
 use Psr\Http\Message\ResponseInterface;
+use Illuminate\Support\Facades\Log;
 
 class Client
 {
@@ -357,6 +358,7 @@ class Client
         );
 
         $data = json_decode((string)$response->getBody(), true);
+        Log::debug("Got Lets Encrypt account info: ",$data);
         $accountURL = $response->getHeaderLine('Location');
         $date = (new \DateTime())->setTimestamp(strtotime($data['createdAt']));
         return new Account($data['contact'], $date, ($data['status'] == 'valid'), $data['initialIp'], $accountURL);
