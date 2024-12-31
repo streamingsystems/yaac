@@ -361,7 +361,7 @@ class Client
         Log::debug("Got Lets Encrypt account info: ",$data);
         $accountURL = $response->getHeaderLine('Location');
         $date = (new \DateTime())->setTimestamp(strtotime($data['createdAt']));
-        return new Account($data['contact'], $date, ($data['status'] == 'valid'), $data['initialIp'], $accountURL);
+        return new Account($data['contact'], $date, ($data['status'] == 'valid'), $data['initialIp'] ?? '', $accountURL);
     }
 
     /**
