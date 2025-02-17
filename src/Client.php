@@ -358,7 +358,7 @@ class Client
         );
 
         $data = json_decode((string)$response->getBody(), true);
-        Log::debug("Got Lets Encrypt account info: ",$data);
+       // Log::debug("Got Lets Encrypt account info: ",$data);
         $accountURL = $response->getHeaderLine('Location');
         $date = (new \DateTime())->setTimestamp(strtotime($data['createdAt']));
         return new Account($data['contact'], $date, ($data['status'] == 'valid'), $data['initialIp'] ?? '', $accountURL);
@@ -594,7 +594,7 @@ class Client
     protected function request($url, $payload = [], $method = 'POST'): ResponseInterface
     {
         try {
-            Log::debug("Sending request to: $url: ",$payload);
+           // Log::debug("Sending request to: $url: ",$payload);
             $response = $this->getHttpClient()->request($method, $url, [
                 'json'    => $payload,
                 'headers' => [
